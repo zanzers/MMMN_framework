@@ -32,7 +32,14 @@ def start_IF(img: np.ndarray):
     norm, prnu, noise = image_forinsics.noise_analyze(7, 49)
     noise_features = extractNOISE_features(norm, prnu, noise)
     initial_report(noise_features)
+
     
+    # copy_move = image_forinsics.compyMove(16, 8, 1000)
+    # copyMove_features = extractCOPYMOVE_features(copy_move)
+    # initial_report(copyMove_features)
+
+
+
 
 
 def  proced_frequecny(img):

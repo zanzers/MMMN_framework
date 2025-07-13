@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import pywt
 
-
 class Image_Forensics:
     def __init__(self, img_input: np.ndarray) -> None:
         self.img_input = img_input
@@ -77,3 +76,11 @@ class Image_Forensics:
            cv2.rectangle(mask, (x2, y2), (x2 + block_size, y2 + block_size), 255, -1)
         
         return mask
+    
+    def resample_detect(self) -> np.ndarray:
+        
+        resample_gray = grayScale(self.img_input)
+        mag = laptican_magitude(resample_gray)
+        spectrum = norm_variance(mag, np.uint8)
+
+        return spectrum

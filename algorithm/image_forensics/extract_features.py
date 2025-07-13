@@ -71,6 +71,53 @@ def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarra
     return noise_features
 
 
+def extractCOPYMOVE_features(mask: np.ndarray) -> dict:
+    
+    tamper_ratio = np.sum(mask) / 255 / (mask.shape[0] * mask.shape[1])
+    total_tampered= int(np.sum(mask) / 255)
 
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    bbox_area = 0
+    bbox_img = cv2.cvtColor(mask.copy(), cv2.COLOR_GRAY2BGR)
 
+    if contours:
+        largest = max(contours, key=cv2.countourArea)
+        x, y, w, h = cv2.boundingRect(largest)
+        bbox_area = w * h
+        cv2.rectangle(bbox_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        
+        create_saveImg([
+            ("copy_move_output.jpg", bbox_img),
+        ], remove_after=True)
 
+    
+    copyMove_Features = {
+        "features_name": "COPY-MOVE DETECTION",
+        "tamper_ratio": round(tamper_ratio),
+        "tampered_area": total_tampered,
+        "bounding_box": bbox_area,
+        "tampered": tamper_ratio
+    }
+
+    return copyMove_Features
+
+def extractResample_features(spectrum: np.ndarray) -> dict:
+
+    central_band = spectrum[
+        spectrum.shape[0]//2 - 30 : spectrum.shape[0]//2 + 30,
+        spectrum.shape[1]//2 - 30 : spectrum.shape[1]//2 + 30
+    ]
+
+    periodicity = float(np.std(central_band))
+    create_saveImg([
+        ("resample_output.jpg", spectrum)
+    ])
+
+    resample_Features = {
+        "features_name": "RESAMPLING DETECTION",
+        "periodicity_std": round(periodicity, 4),
+        "resampled": periodicity
+        
+    }
+
+    return resample_Features

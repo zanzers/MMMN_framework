@@ -5,6 +5,7 @@ import numpy as np
 import os
 from typing import Union
 import shutil
+from scipy.fftpack import fft2, fftshift
 
 # Handle all repeated funtions!
 
@@ -85,7 +86,6 @@ def msmt_calculation(img: np.ndarray) -> dict[str, int]:
 
     return mean_error, std_error, max_error, total_error
 
-
 def euclidenMask_pca(components_val: int, blocks: np.ndarray ,threshold: int) -> np.ndarray:
 
     pca = PCA(n_components=components_val)
@@ -97,3 +97,14 @@ def euclidenMask_pca(components_val: int, blocks: np.ndarray ,threshold: int) ->
 
 
     return macthes
+
+def laptican_magitude(img: np.ndarray) -> np.ndarray:
+
+    laptican = cv2.Laplacian(img, cv2.CV_64F)
+    abs_lap = np.abs(laptican)
+
+    fft_img = fftshift(fft2(abs_lap))
+    magnitude = np.abs(fft_img)
+    magnitude = np.log1p(magnitude)
+
+    return magnitude
