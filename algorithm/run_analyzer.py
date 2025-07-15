@@ -27,18 +27,19 @@ def start_IF(img: np.ndarray):
 
     ela = image_forinsics.ela_anaylze(85, 40)
     ela_features = extractELA_features(ela)
-    initial_report(ela_features)
+    # initial_report(ela_features)
 
     norm, prnu, noise = image_forinsics.noise_analyze(7, 49)
     noise_features = extractNOISE_features(norm, prnu, noise)
-    initial_report(noise_features)
+    # initial_report(noise_features)
 
     
-    # copy_move = image_forinsics.compyMove(16, 8, 1000)
-    # copyMove_features = extractCOPYMOVE_features(copy_move)
+    copy_move = image_forinsics.compyMove(16, 8, 1000)
+    copyMove_features = extractCOPYMOVE_features(copy_move)
     # initial_report(copyMove_features)
 
-
+    resample = image_forinsics.resample_detect()
+    resample_features = extractResample_features(resample)
 
 
 

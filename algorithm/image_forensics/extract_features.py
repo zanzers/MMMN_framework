@@ -25,6 +25,8 @@ def extractELA_features(ela_img: np.ndarray) -> dict:
         "tamper_map": 'bw_output'
     }
 
+    save_features("Ela", ela_features)
+
     return ela_features
 
 
@@ -68,6 +70,8 @@ def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarra
 
     }
 
+    save_features("Noise", noise_features)
+
     return noise_features
 
 
@@ -81,7 +85,7 @@ def extractCOPYMOVE_features(mask: np.ndarray) -> dict:
     bbox_img = cv2.cvtColor(mask.copy(), cv2.COLOR_GRAY2BGR)
 
     if contours:
-        largest = max(contours, key=cv2.countourArea)
+        largest = max(contours, key=cv2.contourArea)
         x, y, w, h = cv2.boundingRect(largest)
         bbox_area = w * h
         cv2.rectangle(bbox_img, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -98,7 +102,7 @@ def extractCOPYMOVE_features(mask: np.ndarray) -> dict:
         "bounding_box": bbox_area,
         "tampered": tamper_ratio
     }
-
+    save_features("Copy-Move", copyMove_Features)
     return copyMove_Features
 
 def extractResample_features(spectrum: np.ndarray) -> dict:
@@ -120,4 +124,6 @@ def extractResample_features(spectrum: np.ndarray) -> dict:
         
     }
 
+
+    save_features("Resample", resample_Features)
     return resample_Features

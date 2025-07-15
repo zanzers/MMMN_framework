@@ -1,0 +1,38 @@
+{
+    "Ela": {
+        "features_name": "ERROR LEVEL ANALYSIS",
+        "mean_error": 56.383443196614586,
+        "std_error": 45.26164334576508,
+        "max_error": 240.0,
+        "total_error": 5542718.0,
+        "tampered_ratio": 0.007161458333333333,
+        "gray_path": "gray_output",
+        "tamper_map": "bw_output"
+    },
+    "Noise": {
+        "features_name": "NOISE ANALYSIS",
+        "mean_norm_error": 11.176198323567709,
+        "std_norm_error": 24.807003883975995,
+        "max_norm_error": 254.0,
+        "total_norm_error": 1098665.0,
+        "local_norm_ratio": 0.0008748372395833334,
+        "mean_prnu_error": 102.12185668945312,
+        "std_prnu_error": 121.41060055946352,
+        "max_prnu_error": 255.0,
+        "total_prnu_error": 10038987.0,
+        "local_prnu_ratio": 0.3989359537760417,
+        "wavelet_noise": 10.432137807210287
+    },
+    "Copy-Move": {
+        "features_name": "COPY-MOVE DETECTION",
+        "tamper_ratio": 1,
+        "tampered_area": 93873,
+        "bounding_box": 93873,
+        "tampered": 0.954925537109375
+    },
+    "Resample": {
+        "features_name": "RESAMPLING DETECTION",
+        "periodicity_std": 17.2552,
+        "resampled": 17.255224810363174
+    }
+}
