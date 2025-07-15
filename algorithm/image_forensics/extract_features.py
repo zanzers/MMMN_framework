@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from algorithm.image_forensics.global_algo import *
 
-def extractELA_features(ela_img: np.ndarray) -> dict:
+def extractELA_features(ela_img: np.ndarray) -> None:
 
     gray = grayScale(ela_img)
     mean_error, std_error, max_error, total_error = msmt_calculation(gray)
@@ -21,17 +21,14 @@ def extractELA_features(ela_img: np.ndarray) -> dict:
         "max_error": max_error,
         "total_error": total_error,
         "tampered_ratio": tamper_ratio,
-        "gray_path": 'gray_output',
-        "tamper_map": 'bw_output'
     }
 
     save_features("Ela", ela_features)
 
-    return ela_features
 
 
 
-def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarray) -> tuple[dict, dict]: 
+def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarray) -> None: 
 
 
     mean_norm, std_norm, max_norm, total_norm = msmt_calculation(norm)
@@ -72,10 +69,8 @@ def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarra
 
     save_features("Noise", noise_features)
 
-    return noise_features
 
-
-def extractCOPYMOVE_features(mask: np.ndarray) -> dict:
+def extractCOPYMOVE_features(mask: np.ndarray) -> None:
     
     tamper_ratio = np.sum(mask) / 255 / (mask.shape[0] * mask.shape[1])
     total_tampered= int(np.sum(mask) / 255)
@@ -102,10 +97,11 @@ def extractCOPYMOVE_features(mask: np.ndarray) -> dict:
         "bounding_box": bbox_area,
         "tampered": tamper_ratio
     }
-    save_features("Copy-Move", copyMove_Features)
-    return copyMove_Features
 
-def extractResample_features(spectrum: np.ndarray) -> dict:
+    save_features("Copy-Move", copyMove_Features)
+
+
+def extractResample_features(spectrum: np.ndarray) -> None:
 
     central_band = spectrum[
         spectrum.shape[0]//2 - 30 : spectrum.shape[0]//2 + 30,
@@ -123,7 +119,6 @@ def extractResample_features(spectrum: np.ndarray) -> dict:
         "resampled": periodicity
         
     }
-
-
+    
     save_features("Resample", resample_Features)
-    return resample_Features
+   
