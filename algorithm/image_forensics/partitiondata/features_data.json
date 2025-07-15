@@ -5,9 +5,7 @@
         "std_error": 45.26164334576508,
         "max_error": 240.0,
         "total_error": 5542718.0,
-        "tampered_ratio": 0.007161458333333333,
-        "gray_path": "gray_output",
-        "tamper_map": "bw_output"
+        "tampered_ratio": 0.007161458333333333
     },
     "Noise": {
         "features_name": "NOISE ANALYSIS",

@@ -26,8 +26,6 @@ def extractELA_features(ela_img: np.ndarray) -> None:
     save_features("Ela", ela_features)
 
 
-
-
 def extractNOISE_features(norm: np.ndarray, prnu: np.ndarray, wavelet: np.ndarray) -> None: 
 
 
@@ -119,6 +117,6 @@ def extractResample_features(spectrum: np.ndarray) -> None:
         "resampled": periodicity
         
     }
-    
+
     save_features("Resample", resample_Features)
    

@@ -113,6 +113,7 @@ def laptican_magitude(img: np.ndarray) -> np.ndarray:
 
 
 
+
 def save_features(label: str, feature_data: dict, reset: bool = False):
         save_dir = os.path.join(
             "algorithm",
@@ -122,15 +123,12 @@ def save_features(label: str, feature_data: dict, reset: bool = False):
         os.makedirs(save_dir, exist_ok=True)
         json_path = os.path.join(save_dir, "features_data.json")    
 
-        
         existing_data = {} if reset or not os.path.exists(json_path) else json.load(open(json_path, "r"))
-
         existing_data[label] = feature_data
         with open(json_path, "w") as f:
             json.dump(existing_data, f, indent=4)
         
         print(f"'{label}' features saved to {json_path}")
-
 
 
 
